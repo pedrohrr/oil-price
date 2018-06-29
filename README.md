@@ -12,16 +12,17 @@ This application controls the stock and calculates the prices for the given Oil 
 | QFC | Standard | 22 |  | 123  
 
 ## Setup
- Download and Install Maven
+ 
+### Download and Install Maven
 
  https://maven.apache.org/download.cgi
 
- Download / Clone the repository and execute
+### Download / Clone the repository and execute
  
  ` ` `
  mvn spring-boot:run
  ` ` ` 
  
- Access via browser
+### Access via browser
  
  http://localhost:8080/swagger-ui.html
