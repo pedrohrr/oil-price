@@ -19,11 +19,12 @@ public class OilFacade {
     public Double calculateRevenueYield(final String oilId, final Double price) {
         final Oil oil = repository.findById(oilId);
         Assert.assertNotNull("Oil not found for the given id", oil);
-        return calculationService.revenueYeld(oil, price);
+        return calculationService.revenueYield(oil, price);
     }
 
     public Double calculatePriceEarningsRatio(final String oilId, final Double price) {
         final Double revenue = calculateRevenueYield(oilId, price);
         return calculationService.priceEarningsRatio(revenue, price);
     }
+
 }

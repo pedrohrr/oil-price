@@ -5,13 +5,16 @@ import com.phrrodr.oilprice.model.Oil;
 import com.phrrodr.oilprice.model.Transaction;
 import org.junit.Assert;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
 public class OilCalculationService {
 
-    public double revenueYeld(final Oil oil, final Double price) {
+    public double revenueYield(final Oil oil, final Double price) {
         Assert.assertNotNull("Oil object cannot be nul", oil);
         Assert.assertNotNull("Oil type is required", oil.getType());
         Assert.assertNotNull("Price is required", price);
@@ -34,11 +37,19 @@ public class OilCalculationService {
     }
 
     public double volumeWeighted(final List<Transaction> transactions) {
-        Assert.assertNotNull("Transaction list must be provided", transactions);
-
         final Double sumOfQtysOverPrices = transactions.stream().mapToDouble(Transaction::quantityOverPrice).sum();
         final Double sumOfQtys = transactions.stream().mapToDouble(Transaction::getQuantity).sum();
         return sumOfQtysOverPrices / sumOfQtys;
+    }
+
+    public double geometricMean(final List<Transaction> transactions) {
+        if (CollectionUtils.isEmpty(transactions)) {
+            Assert.fail("Transactions cannot be empty");
+        }
+
+        final double productOfPrices = transactions.stream().mapToDouble(Transaction::getPrice).reduce(1.0, (x, y) -> x * y);
+
+        return Math.pow(productOfPrices, 1.0 / transactions.size());
     }
 
 }

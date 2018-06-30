@@ -52,4 +52,7 @@ public class TransactionRepository {
         return TRANSACTIONS.stream().filter(t -> t.getTimestamp().isAfter(interval)).collect(Collectors.toList());
     }
 
+    public List<Transaction> findAll() {
+        return TRANSACTIONS;
+    }
 }

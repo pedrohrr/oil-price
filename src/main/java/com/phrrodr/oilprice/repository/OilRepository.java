@@ -19,10 +19,6 @@ public class OilRepository {
         new Oil("QFC", OilType.STANDARD, 22, 123.0)
     ));
 
-    public List<Oil> findAll() {
-        return OILS;
-    }
-
     public Oil findById(final String id) {
         return OILS.stream().filter(oil -> oil.getId().equals(id)).findFirst().orElse(null);
     }
